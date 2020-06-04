@@ -3,18 +3,14 @@ let TMDB = require('../lib/index')('YOUR_API_KEY');
 
 (async function(){
     var search = await TMDB.Search('Lucifer');
-    // var latest = await TMDB.GetLatest();
-    // var airingToday = await TMDB.GetAiringToday();
-    // var onTheAir = await TMDB.GetOnTheAir();
-    // var popular = await TMDB.GetPopular();
-    // var topRated = await TMDB.GetTopRated();
-    // console.log(search[0].name, search[0].id)
-    //  Testing:
-    //  Finish testing show then onto season & episode
+    var latest = await TMDB.GetLatest();
+    var airingToday = await TMDB.GetAiringToday();
+    var onTheAir = await TMDB.GetOnTheAir();
+    var popular = await TMDB.GetPopular();
+    var topRated = await TMDB.GetTopRated();
+    
     var Show = TMDB.Show(search[0].id);
-    // var show = await Show.GetDetails();
-
-    // vvvvvvv Test all of the below vvvvvvv
+    var show = await Show.GetDetails();
     var accountStates = await Show.GetAccountStates();
     var alternativeTitles = await Show.GetAlternativeTitles();
     var changes = await Show.GetChanges();
