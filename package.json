@@ -1,0 +1,32 @@
+{
+  "name": "tmdb-tv",
+  "version": "1.0.0",
+  "description": "TMDB (The Movie Database) API wrapper for TV Shows only.",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seannhewitson/tmdb-tv.git"
+  },
+  "keywords": [
+    "TMDB",
+    "The",
+    "Movie",
+    "Database",
+    "API",
+    "wrapper",
+    "async",
+    "await"
+  ],
+  "author": "Sean Hewitson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/seannhewitson/tmdb-tv/issues"
+  },
+  "homepage": "https://github.com/seannhewitson/tmdb-tv#readme",
+  "dependencies": {
+    "node-fetch": "^2.6.0"
+  }
+}
