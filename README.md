@@ -18,10 +18,12 @@ var results = await TMDB.Search("Lucifer");
 //  Results returns an array of shows.
 var Show = await TMDB.Show(results[0].id);
 
-var Season = await Show.Season(1);
+var Season = Show.Season(1);
 
+var seasonDetails = await Season.getDetails();
 
 ```
+Basic usage of each method can be found in the test document "test/app.js"
 
 ### Useful Information
 For examples on what each object is returned, check out tmdb api documentation here:
