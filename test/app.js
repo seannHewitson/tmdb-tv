@@ -1,4 +1,4 @@
-let TMDB = require('../lib/index')('45f92bdfc8545cfd0731561a9ad0cfea');
+let TMDB = require('../lib/index')('YOUR_API_KEY');
 
 
 (async function(){
