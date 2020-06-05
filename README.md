@@ -15,12 +15,23 @@ let TMDB = require('tmdb-tv')("YOUR_TMDB_API_KEY");
 ### Example
 ```js
 var results = await TMDB.Search("Lucifer");
-//  Results returns an array of shows.
-var Show = await TMDB.Show(results[0].id);
+//  results returns an array of shows.
+console.log(results);
 
-var Season = Show.Season(1);
+var Show = TMDB.Show(results[0].id);
+var show = await Show.GetDetails();
+console.log(show);
+show.seasons.forEach(async(season_no) => {
+    var Season = Show.Season(season_no);
+    var season = await Season.GetDetails();
+    console.log(season);
+    season.episodes.forEach(async(episode_no) => {
+        var Episode = Season.Episode(episode_no);
+        var episode = await Episode.GetDetails();
+        console.log(episode);
+    });
+});
 
-var seasonDetails = await Season.getDetails();
 
 ```
 Basic usage of each method can be found in the test document "test/app.js"
