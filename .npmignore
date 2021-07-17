@@ -10,3 +10,4 @@ tslint.json
 .prettierrc
 jestconfig.json
 tslint.json
+rollup.config.js
