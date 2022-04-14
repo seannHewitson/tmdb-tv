@@ -1,5 +1,5 @@
 import TMDB from '../';
-import { ShowDetails } from '../show.types';
+import { ShowDetails } from '../index';
 
 const tmdb = TMDB('45f92bdfc8545cfd0731561a9ad0cfea');
 

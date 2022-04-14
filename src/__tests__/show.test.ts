@@ -1,12 +1,12 @@
-import TMDB from '../';
+import TMDB, { Keyword, Result } from '../';
 
 const tmdb = TMDB('45f92bdfc8545cfd0731561a9ad0cfea');
 
 test('Details', async () => {
   const show = await tmdb.Show('48866').GetDetails();
-  expect(show.name).toBe('The 100');
-  expect(show.number_of_episodes).toBe(100);
-  expect(show.number_of_seasons).toBe(7);
+  expect(typeof show.name).toBe('string');
+  expect(typeof show.number_of_episodes).toBe('number');
+  expect(typeof show.number_of_seasons).toBe('number');
 });
 
 test('Aggregate Credits', async () => {
@@ -14,7 +14,6 @@ test('Aggregate Credits', async () => {
   expect(credits.id).toBe(48866);
   expect(credits.cast.length).toBeGreaterThan(1);
   expect(credits.crew.length).toBeGreaterThan(1);
-  // console.log('credits', credits);
 });
 
 test('Content Ratings', async () => {
@@ -42,7 +41,7 @@ test('Episode Groups', async () => {
   expect(groups.results.length).toBe(0);
 });
 
-test('ExternalIDs', async () => {
+test('External IDs', async () => {
   const externalIDs = await tmdb.Show('48866').GetExternalIDs();
   expect(externalIDs.id).toBe(48866);
   expect(externalIDs.imdb_id).toBe('tt2661044');
@@ -60,26 +59,30 @@ test('Keywords', async () => {
   const keywords = await tmdb.Show('48866').GetKeywords();
   expect(keywords.id).toBe(48866);
   expect(keywords.results.length).toBeGreaterThan(1);
-  expect(keywords.results[2].name).toBe('survivor');
-  expect(keywords.results[3].name).toBe('survival');
-  expect(keywords.results[4].name).toBe('apocalypse');
+  const sorted = keywords.results.sort((a: Keyword, b: Keyword) => (a.name < b.name ? -1 : 1));
+  expect(sorted[0].name).toBe('apocalypse');
+  expect(sorted[5].name).toBe('survival');
+  expect(sorted[6].name).toBe('team');
 });
 
 test('Recommendations', async () => {
   const recommendations = await tmdb.Show('48866').GetRecommendations();
   expect(recommendations.page).toBe(1);
   expect(recommendations.results.length).toBe(21);
-  expect(recommendations.results[0].name).toBe('Fear the Walking Dead');
-  expect(recommendations.results[1].name).toBe('Arrow');
-  expect(recommendations.results[3].name).toBe('The Walking Dead');
+  const sorted = recommendations.results.sort((a: Result, b: Result) => (a.name < b.name ? -1 : 1));
+  expect(sorted[1].name).toBe('Arrow');
+  expect(sorted[2].name).toBe('Fear the Walking Dead');
+  expect(sorted[17].name).toBe('The Walking Dead');
 });
 
 test('Similar Shows', async () => {
   const similar = await tmdb.Show('48866').GetSimilarShows();
   expect(similar.page).toBe(1);
   expect(similar.results.length).toBe(20);
-  expect(similar.results[0].name).toBe('Jericho');
-  expect(similar.results[4].name).toBe('Sherlock Holmes');
+  const sorted = similar.results.sort((a: Result, b: Result) => (a.name < b.name ? -1 : 1));
+  expect(sorted[0].name).toBe('A Touch of Frost');
+  expect(sorted[11].name).toBe('Jericho');
+  expect(sorted[15].name).toBe('Sherlock Holmes');
 });
 
 test('Videos', async () => {
